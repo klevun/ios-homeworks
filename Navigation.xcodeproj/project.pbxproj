@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC22EE4227C4B65900E69314 /* NewslineNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE4127C4B65900E69314 /* NewslineNavController.swift */; };
+		FC22EE4427C4B88500E69314 /* ProfileNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE4327C4B88500E69314 /* ProfileNavController.swift */; };
+		FC41E20B27C4104A00F0DEEB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41E20A27C4104A00F0DEEB /* TabBar.swift */; };
 		FC5A941D27B5A15A001FEA76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A941C27B5A15A001FEA76 /* AppDelegate.swift */; };
 		FC5A941F27B5A15A001FEA76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A941E27B5A15A001FEA76 /* SceneDelegate.swift */; };
 		FC5A942127B5A15A001FEA76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A942027B5A15A001FEA76 /* ViewController.swift */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC22EE4127C4B65900E69314 /* NewslineNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewslineNavController.swift; sourceTree = "<group>"; };
+		FC22EE4327C4B88500E69314 /* ProfileNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavController.swift; sourceTree = "<group>"; };
+		FC41E20A27C4104A00F0DEEB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		FC5A941927B5A15A001FEA76 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A941C27B5A15A001FEA76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5A941E27B5A15A001FEA76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,9 +63,12 @@
 				FC5A941C27B5A15A001FEA76 /* AppDelegate.swift */,
 				FC5A941E27B5A15A001FEA76 /* SceneDelegate.swift */,
 				FC5A942027B5A15A001FEA76 /* ViewController.swift */,
+				FC41E20A27C4104A00F0DEEB /* TabBar.swift */,
 				FC5A942527B5A15B001FEA76 /* Assets.xcassets */,
 				FC5A942727B5A15B001FEA76 /* LaunchScreen.storyboard */,
 				FC5A942A27B5A15B001FEA76 /* Info.plist */,
+				FC22EE4127C4B65900E69314 /* NewslineNavController.swift */,
+				FC22EE4327C4B88500E69314 /* ProfileNavController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -134,9 +143,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC22EE4227C4B65900E69314 /* NewslineNavController.swift in Sources */,
 				FC5A942127B5A15A001FEA76 /* ViewController.swift in Sources */,
 				FC5A941D27B5A15A001FEA76 /* AppDelegate.swift in Sources */,
+				FC22EE4427C4B88500E69314 /* ProfileNavController.swift in Sources */,
 				FC5A941F27B5A15A001FEA76 /* SceneDelegate.swift in Sources */,
+				FC41E20B27C4104A00F0DEEB /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

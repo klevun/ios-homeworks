@@ -19,8 +19,8 @@ class TabBar: UITabBarController {
 
     func setupVCs() {
           viewControllers = [
-              createNavController(for: NewslineNavController(), title: NSLocalizedString("Лента", comment: ""), image: UIImage(systemName: "scribble")!),
-              createNavController(for: ProfileNavController(), title: NSLocalizedString("Профиль", comment: ""), image: UIImage(systemName: "person")!)
+              createNavController(for: FeedViewController(), title: NSLocalizedString("Лента", comment: ""), image: UIImage(systemName: "scribble")!),
+              createNavController(for: ProfileViewController(), title: NSLocalizedString("Профиль", comment: ""), image: UIImage(systemName: "person")!)
           ]
       }
 

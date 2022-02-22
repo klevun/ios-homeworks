@@ -1,5 +1,5 @@
 //
-//  ProfileNavController.swift
+//  PostViewController.swift
 //  Navigation
 //
 //  Created by Никита Базанков on 22.02.2022.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ProfileNavController: UIViewController {
+class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        self.view.backgroundColor = .purple
         // Do any additional setup after loading the view.
     }
     

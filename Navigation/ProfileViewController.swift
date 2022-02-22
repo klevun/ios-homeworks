@@ -1,5 +1,5 @@
 //
-//  NewslineNavController.swift
+//  ProfileViewController.swift
 //  Navigation
 //
 //  Created by Никита Базанков on 22.02.2022.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class NewslineNavController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
 
+        view.backgroundColor = .yellow
     }
 
 }

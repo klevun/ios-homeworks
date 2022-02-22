@@ -18,9 +18,9 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = .systemBackground
         self.view.addSubview(self.feedButton)
-        self.feedButton.setTitle("Something", for: .normal)
+        self.feedButton.setTitle("Мой пост", for: .normal)
         self.feedButton.setTitleColor(.black, for: .normal)
         self.feedButton.backgroundColor = .systemBlue
         self.feedButton.layer.cornerRadius = 12

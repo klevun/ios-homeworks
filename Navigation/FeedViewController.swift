@@ -9,14 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-
-    struct Post {
-
-        var title = String()
-    }
-
-    static let post = Post(title: "Мой пост")
-
     private lazy var feedButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +37,15 @@ class FeedViewController: UIViewController {
 
      @objc private func feedButtonDidTap() {
         let postViewController = PostViewController()
+         let post = Post(title: "Мой пост")
+         postViewController.post = post
          self.navigationController?.pushViewController(postViewController, animated: true)
     }
 
 }
+
+struct Post {
+
+    var title = String()
+}
+

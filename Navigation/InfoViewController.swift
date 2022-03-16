@@ -18,9 +18,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .systemPink
-
-
+        
         view.backgroundColor = .systemGreen
         self.view.addSubview(self.alertButton)
         self.alertButton.setTitle("Внимание", for: .normal)

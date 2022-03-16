@@ -14,10 +14,13 @@ protocol ProfileHeaderViewProtocol: AnyObject {
 class ProfileHeaderView: UIView {
 
     private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
+        let profileImage = UIImage(named: "pic")
+        var imageView = UIImageView(image: profileImage)
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .red
         imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 75
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -25,16 +28,17 @@ class ProfileHeaderView: UIView {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textColor = .black
-        nameLabel.text = "Okay"
-        nameLabel.backgroundColor = .systemBrown
+        nameLabel.text = "Какое-то имя"
+        nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
 
     private lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.backgroundColor = .white
-        statusLabel.text = "Not Okay"
+        statusLabel.textColor = .gray
+        statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        statusLabel.text = "Какой-то статус"
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
@@ -55,6 +59,11 @@ class ProfileHeaderView: UIView {
         button.backgroundColor = .systemBlue
         button.clipsToBounds = true
         button.layer.cornerRadius = 4
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowRadius = 4
         button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

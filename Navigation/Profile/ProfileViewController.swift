@@ -48,7 +48,6 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: ProfileHeaderViewProtocol {
 
     func didTapStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void) {
-        self.heightConstraint?.constant = textFieldIsVisible ? 214 : 170
 
         UIView.animate(withDuration: 0.3, delay: 0.0) {
             self.view.layoutIfNeeded()

@@ -157,7 +157,12 @@ class ProfileHeaderView: UIView {
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
-        statusText
+
+        if let text = textField.text {
+            statusText = text
+            statusLabel.text = statusText
+        }
+
     }
 
 }

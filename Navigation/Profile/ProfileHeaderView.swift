@@ -76,6 +76,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
 
+
     private var buttonTopConstraint: NSLayoutConstraint?
     private var statusText = String()
 
@@ -117,6 +118,7 @@ class ProfileHeaderView: UIView {
         let buttonHeight = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
 
 
+
         NSLayoutConstraint.activate([topImageConstraint, leadingImageConstraint, heightImageConstraint, widthImageConstraint,
                                      topNameConstraint, leadingNameConstraint, trailingNameConstraint,
                                      leadingStatusLabelConstraint, trailingStatusLabelConstraint, topStatusLabelConstraint,
@@ -125,9 +127,6 @@ class ProfileHeaderView: UIView {
     }
 
     @objc private func didTapButton() {
-
-//        print(statusLabel.text!)
-//        это для основного задания. ниже = дополнительное
 
         if self.textField.isHidden {
             self.addSubview(self.textField)

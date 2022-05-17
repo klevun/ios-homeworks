@@ -30,17 +30,15 @@ class LogInViewController: UIViewController {
     private lazy var vkImage: UIImageView = {
         let logoImage = UIImage(named: "logo")
         var vkImage = UIImageView(image: logoImage)
-        vkImage.center = view.center
         vkImage.translatesAutoresizingMaskIntoConstraints = false
         return vkImage
     }()
 
     private lazy var loginTextField: UITextField = {
         let login = UITextField()
-        login.backgroundColor = .systemGray
+        login.backgroundColor = .systemGray6
         login.textColor = .black
-//        login.font = .systemFont(ofSize: 16, weight: normal)
-//        login.tintColor = .accentColor
+        login.font = .systemFont(ofSize: 16, weight: .regular)
         login.autocapitalizationType = .none
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.5
@@ -51,6 +49,14 @@ class LogInViewController: UIViewController {
 
     private lazy var passwordTextField: UITextField  = {
         let password = UITextField()
+        password.isSecureTextEntry = true
+        password.backgroundColor = .systemGray6
+        password.textColor = .black
+        password.font = .systemFont(ofSize: 16, weight: .regular)
+        password.autocapitalizationType = .none
+        password.layer.borderColor = UIColor.lightGray.cgColor
+        password.layer.borderWidth = 0.5
+        password.layer.cornerRadius = 10
         password.translatesAutoresizingMaskIntoConstraints = false
         return password
     }()
@@ -68,6 +74,11 @@ class LogInViewController: UIViewController {
         let button = UIButton()
         let color = UIColor(rgb: 0x4885CC)
         button.backgroundColor = color
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+        button.setTitle("Войти", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -95,6 +106,7 @@ class LogInViewController: UIViewController {
         let topImageConstraint = self.vkImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120)
         let heightImage = self.vkImage.heightAnchor.constraint(equalToConstant: 100)
         let widthImage = self.vkImage.widthAnchor.constraint(equalToConstant: 100)
+        let leadingImageConstraint = self.vkImage.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -50)
 
         let topStackConstraint = self.textFieldStack.topAnchor.constraint(equalTo: self.vkImage.bottomAnchor, constant: 120)
         let leadingStackConstraint = self.textFieldStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
@@ -102,8 +114,15 @@ class LogInViewController: UIViewController {
         let heigthStack = self.textFieldStack.heightAnchor.constraint(equalToConstant: 100)
 
         NSLayoutConstraint.activate([topButtonConstraint, heightButtonConstraint, leadingBButtonConstraint, trailingButtonConstratint,
-                                    topImageConstraint, heightImage, widthImage,
+                                    topImageConstraint, heightImage, widthImage, leadingImageConstraint,
                                     topStackConstraint, leadingStackConstraint, trailingStackConstraint, heigthStack].compactMap( { $0 } ))
+
+    }
+
+    @objc private func didTapButton() {
+
+        let profileViewController = ProfileViewController()
+        self.navigationController?.pushViewController(profileViewController, animated: true)
 
     }
 

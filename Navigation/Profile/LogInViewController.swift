@@ -27,6 +27,19 @@ extension UIColor {
 
 class LogInViewController: UIViewController {
 
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+
+    private let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
+        return contentView
+    }()
+
     private lazy var vkImage: UIImageView = {
         let logoImage = UIImage(named: "logo")
         var vkImage = UIImageView(image: logoImage)
@@ -92,30 +105,46 @@ class LogInViewController: UIViewController {
     }
 
     private func setupView() {
-        self.view.addSubview(self.loginButton)
-        self.view.addSubview(self.vkImage)
-        self.view.addSubview(self.textFieldStack)
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(contentView)
+        contentView.addSubview(self.loginButton)
+        contentView.addSubview(self.vkImage)
+        contentView.addSubview(self.textFieldStack)
         self.textFieldStack.addArrangedSubview(loginTextField)
         self.textFieldStack.addArrangedSubview(passwordTextField)
 
         let topButtonConstraint = self.loginButton.topAnchor.constraint(equalTo: self.textFieldStack.bottomAnchor, constant: 16)
         let heightButtonConstraint = self.loginButton.heightAnchor.constraint(equalToConstant: 50)
-        let leadingBButtonConstraint = self.loginButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
-        let trailingButtonConstratint = self.loginButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+        let leadingBButtonConstraint = self.loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
+        let trailingButtonConstratint = self.loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+        let bottomButtonConstraint = self.loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
 
-        let topImageConstraint = self.vkImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120)
+        let topImageConstraint = self.vkImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120)
         let heightImage = self.vkImage.heightAnchor.constraint(equalToConstant: 100)
         let widthImage = self.vkImage.widthAnchor.constraint(equalToConstant: 100)
-        let leadingImageConstraint = self.vkImage.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -50)
+        let leadingImageConstraint = self.vkImage.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -50)
 
         let topStackConstraint = self.textFieldStack.topAnchor.constraint(equalTo: self.vkImage.bottomAnchor, constant: 120)
-        let leadingStackConstraint = self.textFieldStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
-        let trailingStackConstraint = self.textFieldStack.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
+        let leadingStackConstraint = self.textFieldStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        let trailingStackConstraint = self.textFieldStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         let heigthStack = self.textFieldStack.heightAnchor.constraint(equalToConstant: 100)
 
-        NSLayoutConstraint.activate([topButtonConstraint, heightButtonConstraint, leadingBButtonConstraint, trailingButtonConstratint,
+        let topScrollConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        let bottomScrollConstraint = self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        let leadingScrollConstraint = self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingScrollConstraont = self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+
+        let topContentConstraint = self.contentView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        let bottomContentConstraint = self.contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        let leadingContentConstraint = self.contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor)
+        let trailingContentConstraint = self.contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+        let widthContent = self.contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+
+        NSLayoutConstraint.activate([topButtonConstraint, heightButtonConstraint, leadingBButtonConstraint, trailingButtonConstratint, bottomButtonConstraint,
                                     topImageConstraint, heightImage, widthImage, leadingImageConstraint,
-                                    topStackConstraint, leadingStackConstraint, trailingStackConstraint, heigthStack].compactMap( { $0 } ))
+                                    topStackConstraint, leadingStackConstraint, trailingStackConstraint, heigthStack,
+                                    topScrollConstraint, bottomScrollConstraint, leadingScrollConstraint, trailingScrollConstraont,
+                                    topContentConstraint, bottomContentConstraint, leadingContentConstraint, trailingContentConstraint, widthContent].compactMap( { $0 } ))
 
     }
 

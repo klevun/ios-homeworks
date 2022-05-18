@@ -59,6 +59,7 @@ class LogInViewController: UIViewController {
         login.layer.borderWidth = 0.5
         login.layer.cornerRadius = 10
         login.translatesAutoresizingMaskIntoConstraints = false
+        login.delegate = self
         return login
     }()
 
@@ -73,6 +74,7 @@ class LogInViewController: UIViewController {
         password.layer.borderWidth = 0.5
         password.layer.cornerRadius = 10
         password.translatesAutoresizingMaskIntoConstraints = false
+        password.delegate = self
         return password
     }()
 

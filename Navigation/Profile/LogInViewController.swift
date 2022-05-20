@@ -58,6 +58,9 @@ class LogInViewController: UIViewController {
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.5
         login.layer.cornerRadius = 10
+        login.placeholder = "Введите email"
+        login.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: login.frame.height))
+        login.leftViewMode = .always
         login.translatesAutoresizingMaskIntoConstraints = false
         login.delegate = self
         return login
@@ -73,6 +76,9 @@ class LogInViewController: UIViewController {
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.5
         password.layer.cornerRadius = 10
+        password.placeholder = "Введите пароль"
+        password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
+        password.leftViewMode = .always
         password.translatesAutoresizingMaskIntoConstraints = false
         password.delegate = self
         return password
@@ -146,7 +152,7 @@ class LogInViewController: UIViewController {
         let topButtonConstraint = self.loginButton.topAnchor.constraint(equalTo: self.textFieldStack.bottomAnchor, constant: 16)
         let heightButtonConstraint = self.loginButton.heightAnchor.constraint(equalToConstant: 50)
         let leadingBButtonConstraint = self.loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
-        let trailingButtonConstratint = self.loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+        let trailingButtonConstratint = self.loginButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         let bottomButtonConstraint = self.loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
 
         let topImageConstraint = self.vkImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120)
@@ -156,7 +162,7 @@ class LogInViewController: UIViewController {
 
         let topStackConstraint = self.textFieldStack.topAnchor.constraint(equalTo: self.vkImage.bottomAnchor, constant: 120)
         let leadingStackConstraint = self.textFieldStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
-        let trailingStackConstraint = self.textFieldStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        let trailingStackConstraint = self.textFieldStack.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         let heigthStack = self.textFieldStack.heightAnchor.constraint(equalToConstant: 100)
 
         let topScrollConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)

@@ -109,12 +109,12 @@ class ProfileHeaderView: UIView {
 
         let buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
         let leadingButtonConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        let trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         let buttonHeight = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
 
         let topTextFieldConstraint = self.textField.topAnchor.constraint(equalTo: self.statusLabel.bottomAnchor, constant: 10)
         let leadingTextFieldConstraint = self.textField.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 15)
-        let trailingTextFieldConstraint = self.textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        let trailingTextFieldConstraint = self.textField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40)
 
 

@@ -12,26 +12,32 @@ class PostTableViewCell: UITableViewCell {
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
+        author.textColor = .black
+        author.numberOfLines = 2
         author.translatesAutoresizingMaskIntoConstraints = false
         return author
     }()
 
     private lazy var textView: UILabel = {
         let description = UILabel()
+        description.font = .systemFont(ofSize: 14, weight: .regular)
         description.numberOfLines = 0
-        description.backgroundColor = .blue
         description.translatesAutoresizingMaskIntoConstraints = false
         return description
     }()
 
     private lazy var likesLabel: UILabel = {
         let likes = UILabel()
+        likes.textColor = .black
+        likes.font = .systemFont(ofSize: 16, weight: .regular)
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
     }()
 
     private lazy var viewsLabel: UILabel = {
         let views = UILabel()
+        views.textColor = .black
+        views.font = .systemFont(ofSize: 16, weight: .regular)
         views.translatesAutoresizingMaskIntoConstraints = false
         return views
     }()
@@ -39,7 +45,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = .red
+        image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -65,8 +71,8 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         postImage.image = post.image
         textView.text = post.description
-        likesLabel.text = "fgsd"
-        viewsLabel.text = "1234"
+        likesLabel.text = "Likes: \(post.likes)"
+        viewsLabel.text = "Views: \(post.views)"
     }
 
     private func layout() {

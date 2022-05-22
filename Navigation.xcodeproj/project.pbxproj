@@ -12,6 +12,8 @@
 		FC22EE5227C4E16500E69314 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE5127C4E16500E69314 /* FeedViewController.swift */; };
 		FC22EE5427C4E17300E69314 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE5327C4E17300E69314 /* ProfileViewController.swift */; };
 		FC41E20B27C4104A00F0DEEB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41E20A27C4104A00F0DEEB /* TabBar.swift */; };
+		FC4C1AE6283A3D9A00F115F9 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C1AE5283A3D9A00F115F9 /* PhotosTableViewCell.swift */; };
+		FC4C1AE8283A432000F115F9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C1AE7283A432000F115F9 /* Photos.swift */; };
 		FC4FD39C28350F570008892C /* FeedPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4FD39B28350F570008892C /* FeedPosts.swift */; };
 		FC4FD3A62837CC990008892C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4FD3A52837CC990008892C /* PostTableViewCell.swift */; };
 		FC4FD3AA28385AFA0008892C /* PostStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4FD3A928385AFA0008892C /* PostStruct.swift */; };
@@ -28,6 +30,8 @@
 		FC22EE5127C4E16500E69314 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		FC22EE5327C4E17300E69314 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC41E20A27C4104A00F0DEEB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		FC4C1AE5283A3D9A00F115F9 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		FC4C1AE7283A432000F115F9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		FC4FD39B28350F570008892C /* FeedPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPosts.swift; sourceTree = "<group>"; };
 		FC4FD3A52837CC990008892C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		FC4FD3A928385AFA0008892C /* PostStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStruct.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC4C1AE9283A432F00F115F9 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				FC4C1AE5283A3D9A00F115F9 /* PhotosTableViewCell.swift */,
+				FC4C1AE7283A432000F115F9 /* Photos.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
 		FC5A941027B5A15A001FEA76 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +105,7 @@
 				FCF58022283268E80086C223 /* LogInViewController.swift */,
 				FC4FD39B28350F570008892C /* FeedPosts.swift */,
 				FC4FD3A52837CC990008892C /* PostTableViewCell.swift */,
+				FC4C1AE9283A432F00F115F9 /* Photo */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -165,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4C1AE8283A432000F115F9 /* Photos.swift in Sources */,
 				FC4FD3A62837CC990008892C /* PostTableViewCell.swift in Sources */,
 				FC22EE5427C4E17300E69314 /* ProfileViewController.swift in Sources */,
 				FC0C2E0127C4EA700070E3B5 /* PostViewController.swift in Sources */,
@@ -174,6 +189,7 @@
 				FC4FD3AA28385AFA0008892C /* PostStruct.swift in Sources */,
 				FC22EE5227C4E16500E69314 /* FeedViewController.swift in Sources */,
 				FC5A941F27B5A15A001FEA76 /* SceneDelegate.swift in Sources */,
+				FC4C1AE6283A3D9A00F115F9 /* PhotosTableViewCell.swift in Sources */,
 				FC4FD39C28350F570008892C /* FeedPosts.swift in Sources */,
 				FC0C2E0527C50BFB0070E3B5 /* InfoViewController.swift in Sources */,
 				FC41E20B27C4104A00F0DEEB /* TabBar.swift in Sources */,

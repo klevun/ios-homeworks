@@ -51,6 +51,7 @@ class PhotosViewController: UIViewController {
 
     private func layout() {
         view.addSubview(collectionView)
+        view.backgroundColor = .white
 
         let topCollectionConstraint = self.collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
 

@@ -7,25 +7,26 @@
 
 import UIKit
 
+extension UIView {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
+
 class ProfileViewController: UIViewController {
 
-    private lazy var profileHeaderView: ProfileHeaderView = {
-        let view = ProfileHeaderView(frame: .zero)
-        view.delegate = self
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private var post = FeedPosts.makePost()
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
 
-    private lazy var uslessButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Бесполезная кнопка", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
 
-    private var bottomConstraint: NSLayoutConstraint?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,39 +35,45 @@ class ProfileViewController: UIViewController {
     }
 
     override func viewWillLayoutSubviews() {
-        
-        let topConstraint = self.profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor)
-        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        self.bottomConstraint = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 280)
 
-        let bottomUslessButtonConstraint = self.uslessButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        let leadingUslessButtonConstraint = self.uslessButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
-        let trailingUslessButtonConstraint = self.uslessButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+        let topTableConstraint = self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        let bottomTableConstraint = self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        let leadingTableConstraint = self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingTableConstraint = self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
 
 
-        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, self.bottomConstraint,
-                                     bottomUslessButtonConstraint, leadingUslessButtonConstraint, trailingUslessButtonConstraint].compactMap({ $0 }))
+        NSLayoutConstraint.activate([topTableConstraint, bottomTableConstraint, leadingTableConstraint, trailingTableConstraint].compactMap({ $0 }))
 
-        profileHeaderView.backgroundColor = .lightGray
 
     }
 
     private func setupView() {
-        self.view.addSubview(self.profileHeaderView)
-        self.view.addSubview(self.uslessButton)
+        self.view.addSubview(self.tableView)
     }
 
 }
 
-extension ProfileViewController: ProfileHeaderViewProtocol {
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return post.count
+    }
 
-    func didTapStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        cell.setupCell(post[indexPath.row])
+        return cell
+    }
 
-        UIView.animate(withDuration: 0.3, delay: 0.0) {
-            self.view.layoutIfNeeded()
-        } completion: { _ in
-            completion()
-        }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ProfileHeaderView()
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        290
     }
 }

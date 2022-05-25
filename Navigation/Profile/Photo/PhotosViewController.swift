@@ -57,9 +57,9 @@ class PhotosViewController: UIViewController {
 
         let bottomCollectionConstraint = self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
 
-        let leadingCollectionConstraint = self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let leadingCollectionConstraint = self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor)
 
-        let trailingCollectionConstraint = self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        let trailingCollectionConstraint = self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
 
         NSLayoutConstraint.activate([topCollectionConstraint, bottomCollectionConstraint, leadingCollectionConstraint, trailingCollectionConstraint].compactMap( { $0 } ))
     }

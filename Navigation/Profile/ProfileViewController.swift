@@ -44,8 +44,6 @@ class ProfileViewController: UIViewController {
 
 
         NSLayoutConstraint.activate([topTableConstraint, bottomTableConstraint, leadingTableConstraint, trailingTableConstraint].compactMap({ $0 }))
-
-
     }
 
     private func setupView() {

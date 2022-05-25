@@ -18,6 +18,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 75
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -72,18 +73,33 @@ class ProfileHeaderView: UIView {
         return button
     }()
 
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.3
+        return view
+    }()
 
     private var statusText = String()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.drawSelf()
+        drawSelf()
+        setupGesture()
         self.backgroundColor = .lightGray
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        imageView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func tapAction() {
     }
 
     private func drawSelf() {

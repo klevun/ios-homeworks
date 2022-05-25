@@ -23,6 +23,7 @@
 		FC5A941F27B5A15A001FEA76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A941E27B5A15A001FEA76 /* SceneDelegate.swift */; };
 		FC5A942627B5A15B001FEA76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A942527B5A15B001FEA76 /* Assets.xcassets */; };
 		FCA0EA5627D8BB3A00F91475 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA0EA5527D8BB3A00F91475 /* ProfileHeaderView.swift */; };
+		FCEE838B283EAF5500876BD9 /* Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE838A283EAF5500876BD9 /* Scrolling.swift */; };
 		FCF58023283268E80086C223 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF58022283268E80086C223 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		FC5A942527B5A15B001FEA76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC5A942A27B5A15B001FEA76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA0EA5527D8BB3A00F91475 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FCEE838A283EAF5500876BD9 /* Scrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrolling.swift; sourceTree = "<group>"; };
 		FCF58022283268E80086C223 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				FCF58022283268E80086C223 /* LogInViewController.swift */,
 				FC4FD39B28350F570008892C /* FeedPosts.swift */,
 				FC4FD3A52837CC990008892C /* PostTableViewCell.swift */,
+				FCEE838A283EAF5500876BD9 /* Scrolling.swift */,
 				FC4C1AE9283A432F00F115F9 /* Photo */,
 			);
 			path = Profile;
@@ -189,6 +192,7 @@
 				FC4FD3A62837CC990008892C /* PostTableViewCell.swift in Sources */,
 				FC22EE5427C4E17300E69314 /* ProfileViewController.swift in Sources */,
 				FC0C2E0127C4EA700070E3B5 /* PostViewController.swift in Sources */,
+				FCEE838B283EAF5500876BD9 /* Scrolling.swift in Sources */,
 				FCF58023283268E80086C223 /* LogInViewController.swift in Sources */,
 				FC5A941D27B5A15A001FEA76 /* AppDelegate.swift in Sources */,
 				FCA0EA5627D8BB3A00F91475 /* ProfileHeaderView.swift in Sources */,

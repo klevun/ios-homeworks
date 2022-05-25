@@ -97,8 +97,8 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        drawSelf()
         setupGesture()
+        drawSelf()
         self.backgroundColor = .lightGray
     }
 
@@ -114,52 +114,74 @@ class ProfileHeaderView: UIView {
 
     @objc private func tapAction() {
 
-        UIImageView.animate(withDuration: 3, animations: {
+        UIImageView.animate(withDuration: 2, animations: {
             self.imageView.layer.cornerRadius = 0
             self.imageView.layer.borderWidth = 0
             self.backgroundView.alpha = 0.5
             self.widthImageConstraint.constant = UIScreen.main.bounds.width
             self.heightImageConstraint.constant = UIScreen.main.bounds.width
             self.topImageConstraint.constant = -(UIScreen.main.bounds.midX - UIScreen.main.bounds.width)
+
             self.closeButton.isHidden = false
             self.closeButton.isUserInteractionEnabled = true
+
             self.layoutIfNeeded()
         }, completion: { _ in
+            UIImageView.animate(withDuration: 0.5, animations: {
+                self.nameLabel.isHidden = true
+                self.statusLabel.isHidden = true
+                self.textField.isHidden = true
+                self.statusButton.isHidden = true
+            }) { _ in
 
+            }
         })
-
-        self.addSubview(backgroundView)
-        self.backgroundView.addSubview(closeButton)
-        let top = self.backgroundView.topAnchor.constraint(equalTo: self.topAnchor)
-        let lead = self.backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-        let trail = self.backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        let height = self.backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
-
-        let topCloseButtonConstraint = self.closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20)
-        let trailingCloseButtonConstraint = self.closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
-
-        NSLayoutConstraint.activate([top, lead, trail, height,
-                                    topCloseButtonConstraint, trailingCloseButtonConstraint].compactMap( { $0 } ))
     }
 
     @objc private func closePhoto() {
-        self.imageView.layer.cornerRadius = 75
-        self.imageView.layer.borderWidth = 3
-        self.backgroundView.alpha = 0.0
-        self.closeButton.isHidden = true
-        topImageConstraint = self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        leadingImageConstraint = self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        heightImageConstraint = self.imageView.heightAnchor.constraint(equalToConstant: 150)
-        widthImageConstraint = self.imageView.widthAnchor.constraint(equalToConstant: 150)
+        UIImageView.animate(withDuration: 2, animations: {
+            self.imageView.layer.cornerRadius = 75
+            self.imageView.layer.borderWidth = 3
+            self.backgroundView.alpha = 0.0
+            self.topImageConstraint.constant = 16
+            self.leadingImageConstraint.constant = 16
+            self.heightImageConstraint.constant = 150
+            self.widthImageConstraint.constant = 150
 
-        NSLayoutConstraint.activate([topImageConstraint, leadingImageConstraint, heightImageConstraint, widthImageConstraint])
-        self.layoutIfNeeded()
+            self.nameLabel.isHidden = false
+            self.statusLabel.isHidden = false
+            self.textField.isHidden = false
+            self.statusButton.isHidden = false
+            self.closeButton.isHidden = true
+
+            self.layoutIfNeeded()
+        }) { _ in
+
+        }
     }
 
     private var topImageConstraint = NSLayoutConstraint()
     private var leadingImageConstraint = NSLayoutConstraint()
     private var heightImageConstraint = NSLayoutConstraint()
     private var widthImageConstraint = NSLayoutConstraint()
+
+    private var topNameConstraint = NSLayoutConstraint()
+    private var leadingNameConstraint = NSLayoutConstraint()
+    private var trailingNameConstraint = NSLayoutConstraint()
+
+    private var leadingStatusLabelConstraint = NSLayoutConstraint()
+    private var trailingStatusLabelConstraint = NSLayoutConstraint()
+    private var topStatusLabelConstraint = NSLayoutConstraint()
+
+    private var leadingButtonConstraint = NSLayoutConstraint()
+    private var buttonTopConstraint = NSLayoutConstraint()
+    private var trailingButtonConstraint = NSLayoutConstraint()
+    private var buttonHeight = NSLayoutConstraint()
+
+    private var topTextFieldConstraint = NSLayoutConstraint()
+    private var leadingTextFieldConstraint = NSLayoutConstraint()
+    private var trailingTextFieldConstraint = NSLayoutConstraint()
+    private var heightTextFieldConstraint = NSLayoutConstraint()
 
     private func drawSelf() {
 
@@ -168,32 +190,44 @@ class ProfileHeaderView: UIView {
         self.addSubview(self.nameLabel)
         self.addSubview(self.statusLabel)
         self.addSubview(self.textField)
+        self.addSubview(backgroundView)
+        self.backgroundView.addSubview(closeButton)
 
-        topImageConstraint = self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        leadingImageConstraint = self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
+        let top = self.backgroundView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
+        let lead = self.backgroundView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
+        let trail = self.backgroundView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+        let height = self.backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
+
+        let topCloseButtonConstraint = self.closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20)
+        let trailingCloseButtonConstraint = self.closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+
+        topImageConstraint = self.imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
+        leadingImageConstraint = self.imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         heightImageConstraint = self.imageView.heightAnchor.constraint(equalToConstant: 150)
         widthImageConstraint = self.imageView.widthAnchor.constraint(equalToConstant: 150)
 
-        let topNameConstraint = self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27)
-        let leadingNameConstraint = self.nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10)
-        let trailingNameConstraint = self.nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        topNameConstraint = self.nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27)
+        leadingNameConstraint = self.nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10)
+        trailingNameConstraint = self.nameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
 
-        let leadingStatusLabelConstraint = self.statusLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10)
-        let trailingStatusLabelConstraint = self.statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-        let topStatusLabelConstraint = self.statusLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 80)
+        leadingStatusLabelConstraint = self.statusLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10)
+        trailingStatusLabelConstraint = self.statusLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        topStatusLabelConstraint = self.statusLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 80)
 
-        let buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
-        let leadingButtonConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        let buttonHeight = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
+        buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
+        leadingButtonConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+        trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        buttonHeight = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
 
-        let topTextFieldConstraint = self.textField.topAnchor.constraint(equalTo: self.statusLabel.bottomAnchor, constant: 10)
-        let leadingTextFieldConstraint = self.textField.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 15)
-        let trailingTextFieldConstraint = self.textField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40)
+        topTextFieldConstraint = self.textField.topAnchor.constraint(equalTo: self.statusLabel.bottomAnchor, constant: 10)
+        leadingTextFieldConstraint = self.textField.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 15)
+        trailingTextFieldConstraint = self.textField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40)
 
 
-        NSLayoutConstraint.activate([topImageConstraint, leadingImageConstraint, heightImageConstraint, widthImageConstraint,
+        NSLayoutConstraint.activate([top, lead, trail, height,
+                                     topImageConstraint, leadingImageConstraint, heightImageConstraint, widthImageConstraint,
+                                     topCloseButtonConstraint, trailingCloseButtonConstraint,
                                      topNameConstraint, leadingNameConstraint, trailingNameConstraint,
                                      leadingStatusLabelConstraint, trailingStatusLabelConstraint, topStatusLabelConstraint,
                                      buttonTopConstraint, leadingButtonConstraint, trailingButtonConstraint, buttonHeight,

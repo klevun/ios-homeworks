@@ -183,23 +183,26 @@ class ProfileHeaderView: UIView {
     private var trailingTextFieldConstraint = NSLayoutConstraint()
     private var heightTextFieldConstraint = NSLayoutConstraint()
 
+    private var topCloseButtonConstraint = NSLayoutConstraint()
+    private var trailingCloseButtonConstraint = NSLayoutConstraint()
+
     private func drawSelf() {
 
+        self.addSubview(self.backgroundView)
         self.addSubview(self.statusButton)
         self.addSubview(self.imageView)
         self.addSubview(self.nameLabel)
         self.addSubview(self.statusLabel)
         self.addSubview(self.textField)
-        self.addSubview(backgroundView)
-        self.backgroundView.addSubview(closeButton)
+        self.backgroundView.addSubview(self.closeButton)
 
-        let top = self.backgroundView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
-        let lead = self.backgroundView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
-        let trail = self.backgroundView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
-        let height = self.backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
+        let top = backgroundView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
+        let lead = backgroundView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
+        let trail = backgroundView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+        let height = backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height)
 
-        let topCloseButtonConstraint = self.closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20)
-        let trailingCloseButtonConstraint = self.closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        topCloseButtonConstraint = self.closeButton.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 20)
+        trailingCloseButtonConstraint = self.closeButton.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -20)
 
         topImageConstraint = self.imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
         leadingImageConstraint = self.imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)

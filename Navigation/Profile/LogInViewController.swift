@@ -28,6 +28,8 @@ extension UIColor {
 class LogInViewController: UIViewController {
 
     private let notificationCenter = NotificationCenter.default
+    private var PersonalLogin = PersonalData().login
+    private var PersonalPassword = PersonalData().password
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -106,6 +108,16 @@ class LogInViewController: UIViewController {
         return button
     }()
 
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemRed
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+
     override func viewDidLoad() {
          super.viewDidLoad()
 
@@ -146,10 +158,15 @@ class LogInViewController: UIViewController {
         contentView.addSubview(self.loginButton)
         contentView.addSubview(self.vkImage)
         contentView.addSubview(self.textFieldStack)
+        self.contentView.addSubview(errorLabel)
         self.textFieldStack.addArrangedSubview(loginTextField)
         self.textFieldStack.addArrangedSubview(passwordTextField)
 
-        let topButtonConstraint = self.loginButton.topAnchor.constraint(equalTo: self.textFieldStack.bottomAnchor, constant: 16)
+        let topErrorConstraint = self.errorLabel.topAnchor.constraint(equalTo: self.textFieldStack.bottomAnchor, constant: 5)
+        let leadingErrorConstraint = self.errorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
+        let trailingErrorConstraint = self.errorLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
+
+        let topButtonConstraint = self.loginButton.topAnchor.constraint(equalTo: self.textFieldStack.bottomAnchor, constant: 33)
         let heightButtonConstraint = self.loginButton.heightAnchor.constraint(equalToConstant: 50)
         let leadingBButtonConstraint = self.loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         let trailingButtonConstratint = self.loginButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20)
@@ -180,14 +197,46 @@ class LogInViewController: UIViewController {
                                     topImageConstraint, heightImage, widthImage, leadingImageConstraint,
                                     topStackConstraint, leadingStackConstraint, trailingStackConstraint, heigthStack,
                                     topScrollConstraint, bottomScrollConstraint, leadingScrollConstraint, trailingScrollConstraont,
-                                    topContentConstraint, bottomContentConstraint, leadingContentConstraint, trailingContentConstraint, widthContent].compactMap( { $0 } ))
+                                    topContentConstraint, bottomContentConstraint, leadingContentConstraint, trailingContentConstraint, widthContent,
+                                    topErrorConstraint, leadingErrorConstraint, trailingErrorConstraint].compactMap( { $0 } ))
 
+    }
+
+    private func alert() {
+        let alert = UIAlertController(title: "Ошибка", message: "Неверный логин или пароль", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Понял(а)", style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 
     @objc private func didTapButton() {
 
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        if let login = loginTextField.text, let password = passwordTextField.text {
+
+            if login == "" {
+                UITextField.animate(withDuration: 0.4, delay: 0) {
+                    self.loginTextField.layer.borderColor = UIColor.systemRed.cgColor
+                } completion: { _ in
+                    self.loginTextField.layer.borderColor = UIColor.systemGray6.cgColor
+                }
+            } else if password == "" {
+                UITextField.animate(withDuration: 0.4, delay: 0) {
+                    self.passwordTextField.layer.borderColor = UIColor.systemRed.cgColor
+                } completion: { _ in
+                    self.passwordTextField.layer.borderColor = UIColor.systemGray6.cgColor
+                }
+            } else if login.count < 6 {
+                self.errorLabel.isHidden = false
+                errorLabel.text = "Логин должен быть больше 8 символов"
+            } else if password.count < 6 {
+                self.errorLabel.isHidden = false
+                errorLabel.text = "Пароль должен быть больше 8 символов"
+            } else if login != PersonalLogin || password != PersonalPassword {
+                alert()
+            } else {
+                let profileViewController = ProfileViewController()
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            }
+        }
 
     }
 

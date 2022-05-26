@@ -251,4 +251,3 @@ class ProfileHeaderView: UIView {
     }
 
 }
-

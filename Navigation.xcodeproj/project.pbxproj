@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC0C2E0127C4EA700070E3B5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2E0027C4EA700070E3B5 /* PostViewController.swift */; };
 		FC0C2E0527C50BFB0070E3B5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2E0427C50BFB0070E3B5 /* InfoViewController.swift */; };
+		FC1E3D32283FF76700AE3156 /* PersonalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E3D31283FF76700AE3156 /* PersonalData.swift */; };
 		FC22EE5227C4E16500E69314 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE5127C4E16500E69314 /* FeedViewController.swift */; };
 		FC22EE5427C4E17300E69314 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22EE5327C4E17300E69314 /* ProfileViewController.swift */; };
 		FC41E20B27C4104A00F0DEEB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41E20A27C4104A00F0DEEB /* TabBar.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		FC0C2E0027C4EA700070E3B5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		FC0C2E0427C50BFB0070E3B5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FC1E3D31283FF76700AE3156 /* PersonalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalData.swift; sourceTree = "<group>"; };
 		FC22EE5127C4E16500E69314 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		FC22EE5327C4E17300E69314 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC41E20A27C4104A00F0DEEB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		FCA0EA5427D8BB1B00F91475 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				FC1E3D31283FF76700AE3156 /* PersonalData.swift */,
 				FC22EE5327C4E17300E69314 /* ProfileViewController.swift */,
 				FCA0EA5527D8BB3A00F91475 /* ProfileHeaderView.swift */,
 				FCF58022283268E80086C223 /* LogInViewController.swift */,
@@ -194,6 +197,7 @@
 				FC0C2E0127C4EA700070E3B5 /* PostViewController.swift in Sources */,
 				FCEE838B283EAF5500876BD9 /* Scrolling.swift in Sources */,
 				FCF58023283268E80086C223 /* LogInViewController.swift in Sources */,
+				FC1E3D32283FF76700AE3156 /* PersonalData.swift in Sources */,
 				FC5A941D27B5A15A001FEA76 /* AppDelegate.swift in Sources */,
 				FCA0EA5627D8BB3A00F91475 /* ProfileHeaderView.swift in Sources */,
 				FC4FD3AA28385AFA0008892C /* PostStruct.swift in Sources */,

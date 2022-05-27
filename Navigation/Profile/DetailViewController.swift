@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
         return contentView
     }()
 
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
         return label
     }()
 
-    private lazy var postImage: UIImageView = {
+    lazy var postImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .black
         image.contentMode = .scaleAspectFit
@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
         return image
     }()
 
-    private lazy var textLabel: UILabel = {
+    lazy var textLabel: UILabel = {
         let text = UILabel()
         text.numberOfLines = 0
         text.translatesAutoresizingMaskIntoConstraints = false

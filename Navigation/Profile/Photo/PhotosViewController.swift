@@ -80,7 +80,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detail = PhotoView()
         detail.setupCell(photo[indexPath.row])
-        navigationController?.pushViewController(detail, animated: false)
+        navigationController?.pushViewController(detail, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

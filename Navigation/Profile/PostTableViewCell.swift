@@ -9,8 +9,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
-    var likeCount = 0
-    var viewCount = 0
 
     private lazy var backView: UIView = {
         let view = UIView()
@@ -39,6 +37,8 @@ class PostTableViewCell: UITableViewCell {
     private lazy var likesLabel: UILabel = {
         let likes = UILabel()
         likes.textColor = .black
+        likes.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(plusLike)))
+        likes.isUserInteractionEnabled = true
         likes.font = .systemFont(ofSize: 16, weight: .regular)
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
@@ -56,6 +56,8 @@ class PostTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(plusView)))
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -64,6 +66,7 @@ class PostTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -74,22 +77,29 @@ class PostTableViewCell: UITableViewCell {
         setupLikeGesture()
     }
 
+    var post: FeedPosts? {
+        didSet {
+            guard let post = post else { return }
+            authorLabel.text = post.author
+            postImage.image = post.image
+            textView.text = post.description
+            likesLabel.text = "Likes: \(post.likes)"
+            viewsLabel.text = "Views: \(post.views)"
+        }
+    }
+
+    var likeTap: ((_ post: FeedPosts) -> ())?
+    var viewWatched: ((_ post: FeedPosts) -> ())?
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupCell(_ post: FeedPosts) {
-        authorLabel.text = post.author
-        postImage.image = post.image
-        textView.text = post.description
-        likesLabel.text = "Likes: \(likeCount)"
-        viewsLabel.text = "Views: \(viewCount)"
-    }
 
     func setupLikeGesture() {
         let likeGesture = UITapGestureRecognizer(target: self, action: #selector(plusLike))
         let viewGesture = UITapGestureRecognizer(target: self, action: #selector(plusView))
-        viewsLikesStack.addGestureRecognizer(likeGesture)
+        likesLabel.addGestureRecognizer(likeGesture)
         textView.addGestureRecognizer(viewGesture)
     }
 
@@ -132,12 +142,28 @@ class PostTableViewCell: UITableViewCell {
     }
 
     @objc func plusLike() {
-        print("qwerty")
-        likeCount += 1
+        if var post = self.post, post.isLiked == false {
+            post.isLiked.toggle()
+            post.likes = post.likes + 1
+            likesLabel.text = "Likes: \(post.likes)"
+            likeTap?(post)
+            return
+        }
+
+        if var post = self.post, post.isLiked == true {
+            post.isLiked.toggle()
+            post.likes = post.likes - 1
+            likesLabel.text = "Likes: \(post.likes)"
+            likeTap?(post)
+            return
+        }
     }
 
     @objc func plusView() {
-        print("zxcvb")
-        viewCount += 1
+        if var post = self.post, post.isWatched == false {
+            post.views = post.views + 1
+            viewWatched?(post)
+            return
+        }
     }
 }

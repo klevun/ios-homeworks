@@ -66,12 +66,6 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
 
-    func setupVC(_ post: FeedPosts) {
-        nameLabel.text = post.author
-        postImage.image = post.image
-        textLabel.text = post.description
-    }
-
     private func setupView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)

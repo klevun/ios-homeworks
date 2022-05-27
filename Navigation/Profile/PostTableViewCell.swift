@@ -9,6 +9,16 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    var likeCount = 0
+    var viewCount = 0
+
+    private lazy var backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
@@ -21,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var textView: UILabel = {
         let description = UILabel()
         description.font = .systemFont(ofSize: 14, weight: .regular)
-        description.numberOfLines = 0
+        description.numberOfLines = 3
         description.translatesAutoresizingMaskIntoConstraints = false
         return description
     }()
@@ -61,6 +71,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        setupLikeGesture()
     }
 
     required init?(coder: NSCoder) {
@@ -71,38 +82,62 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         postImage.image = post.image
         textView.text = post.description
-        likesLabel.text = "Likes: \(post.likes)"
-        viewsLabel.text = "Views: \(post.views)"
+        likesLabel.text = "Likes: \(likeCount)"
+        viewsLabel.text = "Views: \(viewCount)"
+    }
+
+    func setupLikeGesture() {
+        let likeGesture = UITapGestureRecognizer(target: self, action: #selector(plusLike))
+        let viewGesture = UITapGestureRecognizer(target: self, action: #selector(plusView))
+        viewsLikesStack.addGestureRecognizer(likeGesture)
+        textView.addGestureRecognizer(viewGesture)
     }
 
     private func layout() {
-        contentView.addSubview(authorLabel)
-        contentView.addSubview(textView)
-        contentView.addSubview(viewsLikesStack)
+        contentView.addSubview(backView)
+        backView.addSubview(authorLabel)
+        backView.addSubview(textView)
+        backView.addSubview(viewsLikesStack)
+        backView.addSubview(postImage)
         viewsLikesStack.addArrangedSubview(likesLabel)
         viewsLikesStack.addArrangedSubview(viewsLabel)
-        contentView.addSubview(postImage)
 
-        let topAuthorConstraint = self.authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
-        let leadingAuthorConstraint = self.authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        let topBackConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+        let bottomBackConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+        let leadingBackConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
+        let trailingBackConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+
+        let topAuthorConstraint = self.authorLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 16)
+        let leadingAuthorConstraint = self.authorLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16)
         let trailingAuthorConstraint = self.authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
 
         let topImageConstraint = self.postImage.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 12)
-        let imigeWidth = self.postImage.widthAnchor.constraint(equalTo: self.contentView.widthAnchor)
+        let imigeWidth = self.postImage.widthAnchor.constraint(equalTo: self.backView.widthAnchor)
         let imigeHieght = imigeWidth
 
         let topTextConstraint = self.textView.topAnchor.constraint(equalTo: self.postImage.bottomAnchor, constant: 16)
-        let leadingTextConstraint = self.textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
-        let trailingTextConstraint = self.textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        let leadingTextConstraint = self.textView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16)
+        let trailingTextConstraint = self.textView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16)
 
         let topStackConstraint = self.viewsLikesStack.topAnchor.constraint(equalTo: self.textView.bottomAnchor, constant: 16)
-        let leadingStackConstraint = self.viewsLikesStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
-        let trailingStackConstraint = self.viewsLikesStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
-        let bottomStackConstraint = self.viewsLikesStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
+        let leadingStackConstraint = self.viewsLikesStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
+        let trailingStackConstraint = self.viewsLikesStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
+        let bottomStackConstraint = self.viewsLikesStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
 
-        NSLayoutConstraint.activate([topAuthorConstraint, leadingAuthorConstraint, trailingAuthorConstraint,
+        NSLayoutConstraint.activate([topBackConstraint, bottomBackConstraint, trailingBackConstraint, leadingBackConstraint,
+                                     topAuthorConstraint, leadingAuthorConstraint, trailingAuthorConstraint,
                                     topTextConstraint, leadingTextConstraint, trailingTextConstraint,
                                     topImageConstraint, imigeWidth, imigeHieght,
                                     topStackConstraint, leadingStackConstraint, trailingStackConstraint, bottomStackConstraint].compactMap( { $0 } ))
+    }
+
+    @objc func plusLike() {
+        print("qwerty")
+        likeCount += 1
+    }
+
+    @objc func plusView() {
+        print("zxcvb")
+        viewCount += 1
     }
 }

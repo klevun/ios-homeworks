@@ -226,10 +226,10 @@ class LogInViewController: UIViewController {
                 }
             } else if login.count < 6 {
                 self.errorLabel.isHidden = false
-                errorLabel.text = "Логин должен быть больше 8 символов"
+                errorLabel.text = "Логин должен быть не меньше 6 символов"
             } else if password.count < 6 {
                 self.errorLabel.isHidden = false
-                errorLabel.text = "Пароль должен быть больше 8 символов"
+                errorLabel.text = "Пароль должен быть не меньше 6 символов"
             } else if login != PersonalLogin || password != PersonalPassword {
                 alert()
             } else {

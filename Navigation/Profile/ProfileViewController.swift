@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(self.tableView)
     }
 
+
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -57,7 +58,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return post.count + 1
         return section == 0 ? 1 : post.count
     }
 
@@ -72,9 +72,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 && indexPath.row == 0 {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+        } else {
+            let detail = DetailViewController()
+            detail.setupVC(post[indexPath.row])
+            navigationController?.pushViewController(detail, animated: true)
         }
     }
 

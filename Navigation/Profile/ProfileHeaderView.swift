@@ -239,6 +239,19 @@ class ProfileHeaderView: UIView {
     }
 
     @objc private func didTapButton() {
+        if let text = textField.text {
+            if text == "" {
+                UITextField.animate(withDuration: 1, delay: 0) {
+                    self.textField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.textField.text = "Статус не должен быть пустым"
+                    self.textField.textColor = .red
+                } completion: { _ in
+                    self.textField.layer.borderColor = UIColor.black.cgColor
+                    self.textField.text = ""
+                    self.textField.textColor = .black
+                }
+            }
+        }
         self.endEditing(true)
     }
 

@@ -83,7 +83,7 @@ class ProfileHeaderView: UIView {
 
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
+        button.backgroundColor = .white
         button.isUserInteractionEnabled = false
         button.isHidden = true
         button.addTarget(self, action: #selector(closePhoto), for: .touchUpInside)

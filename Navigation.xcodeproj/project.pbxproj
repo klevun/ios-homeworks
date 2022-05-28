@@ -25,7 +25,6 @@
 		FC5A942627B5A15B001FEA76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A942527B5A15B001FEA76 /* Assets.xcassets */; };
 		FCA0EA5627D8BB3A00F91475 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA0EA5527D8BB3A00F91475 /* ProfileHeaderView.swift */; };
 		FCCA56102840FC2A0063BBC1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA560F2840FC2A0063BBC1 /* DetailViewController.swift */; };
-		FCCA56122841573C0063BBC1 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA56112841573C0063BBC1 /* PhotoView.swift */; };
 		FCF58023283268E80086C223 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF58022283268E80086C223 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +49,6 @@
 		FC5A942A27B5A15B001FEA76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA0EA5527D8BB3A00F91475 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		FCCA560F2840FC2A0063BBC1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		FCCA56112841573C0063BBC1 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		FCF58022283268E80086C223 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +79,6 @@
 				FC4C1AEA283A775000F115F9 /* PhotosViewController.swift */,
 				FC4C1AE5283A3D9A00F115F9 /* PhotosTableViewCell.swift */,
 				FC4C1AEC283C131500F115F9 /* PhotoCollectionViewCell.swift */,
-				FCCA56112841573C0063BBC1 /* PhotoView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -209,7 +206,6 @@
 				FCF58023283268E80086C223 /* LogInViewController.swift in Sources */,
 				FC1E3D32283FF76700AE3156 /* PersonalData.swift in Sources */,
 				FC5A941D27B5A15A001FEA76 /* AppDelegate.swift in Sources */,
-				FCCA56122841573C0063BBC1 /* PhotoView.swift in Sources */,
 				FCA0EA5627D8BB3A00F91475 /* ProfileHeaderView.swift in Sources */,
 				FC4FD3AA28385AFA0008892C /* PostStruct.swift in Sources */,
 				FCCA56102840FC2A0063BBC1 /* DetailViewController.swift in Sources */,

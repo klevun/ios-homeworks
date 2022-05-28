@@ -30,17 +30,22 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         photosView.image = cell.image
     }
 
+    private var xPhotoConstraint = NSLayoutConstraint()
+    private var yPhotoConstraint = NSLayoutConstraint()
+    private var heightPhoto = NSLayoutConstraint()
+    private var widthPhoto = NSLayoutConstraint()
+
     private func setupView() {
         contentView.addSubview(photosView)
 
-        let xPhotoConstraint = self.photosView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
+        xPhotoConstraint = self.photosView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
+        yPhotoConstraint = self.photosView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+        heightPhoto = self.photosView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor)
+        widthPhoto = self.photosView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor)
 
-        let yPhotoConstraint = self.photosView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
-
-        let heightPhoto = self.photosView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor)
-
-        let widthPhoto = self.photosView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor)
 
         NSLayoutConstraint.activate([xPhotoConstraint, yPhotoConstraint, heightPhoto, widthPhoto].compactMap({ $0 }))
     }
+
+
 }

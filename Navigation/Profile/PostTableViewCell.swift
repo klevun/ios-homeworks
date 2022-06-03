@@ -30,6 +30,7 @@ class PostTableViewCell: UITableViewCell {
         let description = UILabel()
         description.font = .systemFont(ofSize: 14, weight: .regular)
         description.numberOfLines = 3
+        description.isUserInteractionEnabled = true
         description.translatesAutoresizingMaskIntoConstraints = false
         return description
     }()
@@ -81,7 +82,9 @@ class PostTableViewCell: UITableViewCell {
         didSet {
             guard let post = post else { return }
             authorLabel.text = post.author
-            postImage.image = post.image
+            if let image = post.image {
+                postImage.image = image
+            }
             textView.text = post.description
             likesLabel.text = "Likes: \(post.likes)"
             viewsLabel.text = "Views: \(post.views)"

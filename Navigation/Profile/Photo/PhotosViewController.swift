@@ -114,6 +114,7 @@ class PhotosViewController: UIViewController {
             self.widthLargeImage.constant = 0
             self.heightLargeImage.constant = 0
 
+            self.navigationController?.navigationBar.isHidden = false
             self.view.layoutIfNeeded()
         }
 
@@ -147,6 +148,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             self.view.layoutIfNeeded()
         } completion: { _ in
 
+            self.navigationController?.navigationBar.isHidden = true
         }
 
     }

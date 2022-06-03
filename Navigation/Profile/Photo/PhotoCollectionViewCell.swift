@@ -27,7 +27,9 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
 
     func setupCell(_ cell: Photos) {
-        photosView.image = cell.image
+        if let image = cell.image {
+            photosView.image = image
+        }
     }
 
     private var xPhotoConstraint = NSLayoutConstraint()

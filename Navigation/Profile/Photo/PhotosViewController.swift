@@ -140,7 +140,11 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
 
         UIView.animate(withDuration: 0.5, delay: 0) {
             self.backView.alpha = 0.5
-            self.largeImage.image = image.image
+            if let image = image.image {
+                self.largeImage.image = image
+            } else {
+                self.largeImage.image = UIImage(named: "no photo.svg")
+            }
             self.largeImage.contentMode = .scaleAspectFit
             self.widthLargeImage.constant = self.view.frame.width
             self.heightLargeImage.constant = self.view.frame.width

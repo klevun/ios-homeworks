@@ -84,6 +84,8 @@ class PostTableViewCell: UITableViewCell {
             authorLabel.text = post.author
             if let image = post.image {
                 postImage.image = image
+            } else {
+                postImage.image = UIImage(named: "no photo.svg")
             }
             textView.text = post.description
             likesLabel.text = "Likes: \(post.likes)"

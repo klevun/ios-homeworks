@@ -29,6 +29,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     func setupCell(_ cell: Photos) {
         if let image = cell.image {
             photosView.image = image
+        } else {
+            photosView.image = UIImage(named: "no photo.svg")
         }
     }
 

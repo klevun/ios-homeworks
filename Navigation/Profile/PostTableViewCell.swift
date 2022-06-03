@@ -9,6 +9,14 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+
+    private lazy var backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
@@ -21,7 +29,8 @@ class PostTableViewCell: UITableViewCell {
     private lazy var textView: UILabel = {
         let description = UILabel()
         description.font = .systemFont(ofSize: 14, weight: .regular)
-        description.numberOfLines = 0
+        description.numberOfLines = 3
+        description.isUserInteractionEnabled = true
         description.translatesAutoresizingMaskIntoConstraints = false
         return description
     }()
@@ -29,6 +38,8 @@ class PostTableViewCell: UITableViewCell {
     private lazy var likesLabel: UILabel = {
         let likes = UILabel()
         likes.textColor = .black
+        likes.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(plusLike)))
+        likes.isUserInteractionEnabled = true
         likes.font = .systemFont(ofSize: 16, weight: .regular)
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
@@ -46,6 +57,8 @@ class PostTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(plusView)))
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -54,6 +67,7 @@ class PostTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -61,48 +75,100 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        setupLikeGesture()
     }
+
+    var post: FeedPosts? {
+        didSet {
+            guard let post = post else { return }
+            authorLabel.text = post.author
+            if let image = post.image {
+                postImage.image = image
+            } else {
+                postImage.image = UIImage(named: "no photo.svg")
+            }
+            textView.text = post.description
+            likesLabel.text = "Likes: \(post.likes)"
+            viewsLabel.text = "Views: \(post.views)"
+        }
+    }
+
+    var likeTap: ((_ post: FeedPosts) -> ())?
+    var viewWatched: ((_ post: FeedPosts) -> ())?
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupCell(_ post: FeedPosts) {
-        authorLabel.text = post.author
-        postImage.image = post.image
-        textView.text = post.description
-        likesLabel.text = "Likes: \(post.likes)"
-        viewsLabel.text = "Views: \(post.views)"
+
+    func setupLikeGesture() {
+        let likeGesture = UITapGestureRecognizer(target: self, action: #selector(plusLike))
+        let viewGesture = UITapGestureRecognizer(target: self, action: #selector(plusView))
+        likesLabel.addGestureRecognizer(likeGesture)
+        textView.addGestureRecognizer(viewGesture)
     }
 
     private func layout() {
-        contentView.addSubview(authorLabel)
-        contentView.addSubview(textView)
-        contentView.addSubview(viewsLikesStack)
+        contentView.addSubview(backView)
+        backView.addSubview(authorLabel)
+        backView.addSubview(textView)
+        backView.addSubview(viewsLikesStack)
+        backView.addSubview(postImage)
         viewsLikesStack.addArrangedSubview(likesLabel)
         viewsLikesStack.addArrangedSubview(viewsLabel)
-        contentView.addSubview(postImage)
 
-        let topAuthorConstraint = self.authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
-        let leadingAuthorConstraint = self.authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        let topBackConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+        let bottomBackConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+        let leadingBackConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
+        let trailingBackConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+
+        let topAuthorConstraint = self.authorLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 16)
+        let leadingAuthorConstraint = self.authorLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16)
         let trailingAuthorConstraint = self.authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
 
         let topImageConstraint = self.postImage.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 12)
-        let imigeWidth = self.postImage.widthAnchor.constraint(equalTo: self.contentView.widthAnchor)
+        let imigeWidth = self.postImage.widthAnchor.constraint(equalTo: self.backView.widthAnchor)
         let imigeHieght = imigeWidth
 
         let topTextConstraint = self.textView.topAnchor.constraint(equalTo: self.postImage.bottomAnchor, constant: 16)
-        let leadingTextConstraint = self.textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
-        let trailingTextConstraint = self.textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        let leadingTextConstraint = self.textView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16)
+        let trailingTextConstraint = self.textView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16)
 
         let topStackConstraint = self.viewsLikesStack.topAnchor.constraint(equalTo: self.textView.bottomAnchor, constant: 16)
-        let leadingStackConstraint = self.viewsLikesStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
-        let trailingStackConstraint = self.viewsLikesStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
-        let bottomStackConstraint = self.viewsLikesStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
+        let leadingStackConstraint = self.viewsLikesStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
+        let trailingStackConstraint = self.viewsLikesStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
+        let bottomStackConstraint = self.viewsLikesStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
 
-        NSLayoutConstraint.activate([topAuthorConstraint, leadingAuthorConstraint, trailingAuthorConstraint,
+        NSLayoutConstraint.activate([topBackConstraint, bottomBackConstraint, trailingBackConstraint, leadingBackConstraint,
+                                     topAuthorConstraint, leadingAuthorConstraint, trailingAuthorConstraint,
                                     topTextConstraint, leadingTextConstraint, trailingTextConstraint,
                                     topImageConstraint, imigeWidth, imigeHieght,
                                     topStackConstraint, leadingStackConstraint, trailingStackConstraint, bottomStackConstraint].compactMap( { $0 } ))
+    }
+
+    @objc func plusLike() {
+        if var post = self.post, post.isLiked == false {
+            post.isLiked.toggle()
+            post.likes = post.likes + 1
+            likesLabel.text = "Likes: \(post.likes)"
+            likeTap?(post)
+            return
+        }
+
+        if var post = self.post, post.isLiked == true {
+            post.isLiked.toggle()
+            post.likes = post.likes - 1
+            likesLabel.text = "Likes: \(post.likes)"
+            likeTap?(post)
+            return
+        }
+    }
+
+    @objc func plusView() {
+        if var post = self.post, post.isWatched == false {
+            post.views = post.views + 1
+            viewWatched?(post)
+            return
+        }
     }
 }

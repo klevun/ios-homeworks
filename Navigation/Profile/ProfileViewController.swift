@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(self.tableView)
     }
 
+
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -57,7 +58,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return post.count + 1
         return section == 0 ? 1 : post.count
     }
 
@@ -67,15 +67,33 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-                cell.setupCell(post[indexPath.row])
+            let post = post[indexPath.row]
+            cell.post = post
+            cell.likeTap = { post in
+                self.post[indexPath.row] = post
+                cell.post = post
+            }
+
+            let detail = DetailViewController()
+
+            cell.viewWatched = { post in
+                self.post[indexPath.row] = post
+                cell.post = post
+                self.navigationController?.pushViewController(detail, animated: true)
+                detail.nameLabel.text = post.author
+                detail.postImage.image = post.image
+                detail.textLabel.text = post.description
+            }
                 return cell
         }
     }
 
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 && indexPath.row == 0 {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-        }
+        } 
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

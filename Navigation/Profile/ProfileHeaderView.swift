@@ -83,7 +83,7 @@ class ProfileHeaderView: UIView {
 
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
+        button.backgroundColor = .white
         button.isUserInteractionEnabled = false
         button.isHidden = true
         button.addTarget(self, action: #selector(closePhoto), for: .touchUpInside)
@@ -239,6 +239,19 @@ class ProfileHeaderView: UIView {
     }
 
     @objc private func didTapButton() {
+        if let text = textField.text {
+            if text == "" {
+                UITextField.animate(withDuration: 1, delay: 0) {
+                    self.textField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.textField.text = "Статус не должен быть пустым"
+                    self.textField.textColor = .red
+                } completion: { _ in
+                    self.textField.layer.borderColor = UIColor.black.cgColor
+                    self.textField.text = ""
+                    self.textField.textColor = .black
+                }
+            }
+        }
         self.endEditing(true)
     }
 
@@ -251,4 +264,3 @@ class ProfileHeaderView: UIView {
     }
 
 }
-
